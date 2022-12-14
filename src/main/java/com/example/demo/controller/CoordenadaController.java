@@ -39,7 +39,7 @@ public class CoordenadaController {
 
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
 
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.ok(dto.toString());
     }
 
     @GetMapping(path = "/coordenadas")
