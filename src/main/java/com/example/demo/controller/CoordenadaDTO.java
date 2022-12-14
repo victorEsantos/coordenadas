@@ -10,4 +10,12 @@ import lombok.NoArgsConstructor;
 public class CoordenadaDTO {
     private Double latitude;
     private Double longitude;
+
+    @Override
+    public String toString() {
+        return "CoordenadaDTO{" +
+            "latitude=" + latitude +
+            ", longitude=" + longitude +
+            '}';
+    }
 }
