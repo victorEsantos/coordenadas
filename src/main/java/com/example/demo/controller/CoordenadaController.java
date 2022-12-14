@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Coordenada;
 import com.example.demo.service.CoordenadaService;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +24,18 @@ public class CoordenadaController {
 
     private final CoordenadaService coordenadaService;
 
-    @PostMapping
+    @PostMapping(path = "salvar")
     public ResponseEntity<String> save(@RequestBody CoordenadaDTO dto) {
        var id = coordenadaService.save(Coordenada.from(dto));
+
+        var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
+
+        return ResponseEntity.created(uri).build();
+    }
+
+    @PostMapping
+    public ResponseEntity<String> saveNaUrl(@ParameterObject CoordenadaDTO dto) {
+        var id = coordenadaService.save(Coordenada.from(dto));
 
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
 
